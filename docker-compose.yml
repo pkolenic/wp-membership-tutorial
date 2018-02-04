@@ -1,0 +1,16 @@
+shamrock-inn:
+  image: wordpress
+  environment:
+    - WORDPRESS_DB_PASSWORD=password
+  ports:
+    - "80:80"
+  volumes:
+    - ./:/var/www/html
+  links:
+    - shamrock-inn-db:mysql
+
+shamrock-inn-db:
+  image: mysql:5.7
+  environment:
+    - MYSQL_ROOT_PASSWORD=password
+    - MYSQL_DATABASE=wordpress
