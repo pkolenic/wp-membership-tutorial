@@ -18,9 +18,14 @@
  * @package WordPress
  */
 
-require_once 'vendor/autoload.php';
-$dotenv = new Dotenv\Dotenv(__DIR__);
-$dotenv->load();
+$file  = '.env';
+$filePath = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$file;
+if (is_file($filePath) && is_readable($filePath)) {
+    require_once 'vendor/autoload.php';
+    $dotenv = new Dotenv\Dotenv(__DIR__);
+    $dotenv->load();
+}
+
 
 // ** MySQL settings - You can get this info from your web host ** //
 $url = parse_url(getenv('DATABASE_URL') ? getenv('DATABASE_URL') : getenv('CLEARDB_DATABASE_URL'));
